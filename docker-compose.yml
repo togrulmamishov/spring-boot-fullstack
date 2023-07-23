@@ -3,7 +3,7 @@ services:
     container_name: postgres
     image: postgres
     environment:
-      POSTGRES_USER: amigoscode
+      POSTGRES_USER: togrul
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
@@ -13,7 +13,18 @@ services:
     networks:
       - db
     restart: unless-stopped
-
+  full-stack-professional:
+    container_name: full-stack-professional
+    image: togrulmamishov/full-stack-professional
+    ports:
+      - "8080:8080"
+    networks:
+      - db
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 networks:
   db:
     driver: bridge

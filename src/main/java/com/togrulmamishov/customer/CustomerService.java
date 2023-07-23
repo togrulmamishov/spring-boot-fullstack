@@ -1,8 +1,9 @@
-package com.amigoscode.customer;
+package com.togrulmamishov.customer;
 
-import com.amigoscode.exception.DuplicateResourceException;
-import com.amigoscode.exception.RequestValidationException;
-import com.amigoscode.exception.ResourceNotFoundException;
+import com.togrulmamishov.exception.DuplicateResourceException;
+import com.togrulmamishov.exception.RequestValidationException;
+import com.togrulmamishov.exception.ResourceNotFoundException;
+import com.togrulmamishov.util.Pageable;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +14,12 @@ public class CustomerService {
 
     private final CustomerDao customerDao;
 
-    public CustomerService(@Qualifier("jpa") CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
         this.customerDao = customerDao;
+    }
+
+    public List<Customer> getAllCustomers(Pageable pageable) {
+        return customerDao.selectAllCustomers(pageable);
     }
 
     public List<Customer> getAllCustomers() {
@@ -24,8 +29,7 @@ public class CustomerService {
     public Customer getCustomer(Integer id) {
         return customerDao.selectCustomerById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "customer with id [%s] not found".formatted(id)
-                ));
+                        "customer with id [%s] not found".formatted(id)));
     }
 
     public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {

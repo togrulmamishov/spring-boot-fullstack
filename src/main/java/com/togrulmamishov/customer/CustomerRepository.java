@@ -1,4 +1,4 @@
-package com.amigoscode.customer;
+package com.togrulmamishov.customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

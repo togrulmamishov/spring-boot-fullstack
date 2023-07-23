@@ -1,5 +1,6 @@
-package com.amigoscode.customer;
+package com.togrulmamishov.customer;
 
+import com.togrulmamishov.util.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +16,10 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getCustomers() {
-        return customerService.getAllCustomers();
+    public List<Customer> getCustomers(
+            Pageable pageable
+    ) {
+        return customerService.getAllCustomers(pageable);
     }
 
     @GetMapping("{customerId}")
@@ -43,5 +46,4 @@ public class CustomerController {
             @RequestBody CustomerUpdateRequest updateRequest) {
         customerService.updateCustomer(customerId, updateRequest);
     }
-
 }

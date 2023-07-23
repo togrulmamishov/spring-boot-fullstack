@@ -1,5 +1,6 @@
-package com.amigoscode.customer;
+package com.togrulmamishov.customer;
 
+import com.togrulmamishov.util.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -16,11 +17,7 @@ public class CustomerListDataAccessService implements CustomerDao {
         customers = new ArrayList<>();
 
         Customer alex = new Customer(
-                1,
-                "Alex",
-                "alex@gmail.com",
-                21
-        );
+                1, "Alex", "alex@gmail.com", 21);
         customers.add(alex);
 
         Customer jamila = new Customer(
@@ -30,6 +27,11 @@ public class CustomerListDataAccessService implements CustomerDao {
                 19
         );
         customers.add(jamila);
+    }
+
+    @Override
+    public List<Customer> selectAllCustomers(Pageable pageable) {
+        return customers;
     }
 
     @Override
@@ -57,7 +59,8 @@ public class CustomerListDataAccessService implements CustomerDao {
 
     @Override
     public boolean existsPersonWithId(Integer id) {
-        return customers.stream()
+        return customers
+                .stream()
                 .anyMatch(c -> c.getId().equals(id));
     }
 

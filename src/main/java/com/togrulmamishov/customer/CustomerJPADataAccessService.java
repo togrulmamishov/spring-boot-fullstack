@@ -1,5 +1,6 @@
-package com.amigoscode.customer;
+package com.togrulmamishov.customer;
 
+import com.togrulmamishov.util.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +13,11 @@ public class CustomerJPADataAccessService implements CustomerDao {
 
     public CustomerJPADataAccessService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+    }
+
+    @Override
+    public List<Customer> selectAllCustomers(Pageable pageable) {
+        return customerRepository.findAll();
     }
 
     @Override

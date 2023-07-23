@@ -1,4 +1,4 @@
-package com.amigoscode.customer;
+package com.togrulmamishov.customer;
 
 import jakarta.persistence.*;
 
@@ -9,25 +9,20 @@ public class Customer {
 
     @Id
     @SequenceGenerator(
-            name = "customer_id_sequence",
-            sequenceName = "customer_id_sequence"
+            name = "customer_id_seq",
+            sequenceName = "customer_id_seq",
+            initialValue = 1,
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "customer_id_sequence"
-    )
+            generator = "customer_id_seq")
     private Integer id;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String name;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private String email;
-    @Column(
-            nullable = false
-    )
+    @Column(nullable = false)
     private Integer age;
 
     public Customer() {
