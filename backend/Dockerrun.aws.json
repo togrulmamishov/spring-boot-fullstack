@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "full-stack-professional",
-      "image": "togrulmamishov/spring-boot-fullstack:latest",
+      "image": "togrulmamishov/spring-boot-fullstack:27.07.2023.21.20.38",
       "essential": true,
       "memory": 512,
       "portMappings": [
