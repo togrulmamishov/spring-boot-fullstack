@@ -25,7 +25,8 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
                 SELECT c.id,
                        c.name,
                        c.age,
-                       c.email
+                       c.email,
+                       c.gender
                 FROM customer c
                 ORDER BY c.id ASC
                 LIMIT ?
@@ -41,7 +42,8 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
                 SELECT c.id,
                        c.name,
                        c.age,
-                       c.email
+                       c.email,
+                       c.gender
                 FROM customer c
                 ORDER BY c.id
                 """;
@@ -54,7 +56,8 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
                 SELECT c.id,
                        c.name,
                        c.age,
-                       c.email
+                       c.email,
+                       c.gender
                 FROM customer c
                 WHERE c.id = ?
                 """;
@@ -67,14 +70,15 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
     @Override
     public void insertCustomer(Customer customer) {
         var sql = """
-                INSERT INTO customer(name, email, age)
-                VALUES (?, ?, ?)
+                INSERT INTO customer(name, email, age, gender)
+                VALUES (?, ?, ?, ?)
                 """;
         jdbcTemplate.update(
                 sql,
                 customer.getName(),
                 customer.getEmail(),
-                customer.getAge());
+                customer.getAge(),
+                customer.getGender().name());
     }
 
     @Override
@@ -114,7 +118,8 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
                 UPDATE customer
                 SET name = ?,
                     age = ?,
-                    email = ?
+                    email = ?,
+                    gender = ?
                 WHERE id = ?
                 """;
         jdbcTemplate.update(
@@ -122,6 +127,7 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
                 customer.getName(),
                 customer.getAge(),
                 customer.getEmail(),
-                customer.getId());
+                customer.getId(),
+                customer.getGender().name());
     }
 }

@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.Random;
 import java.util.UUID;
 
+import static com.togrulmamishov.customer.Gender.MALE;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,7 +35,7 @@ public class CustomerIntegrationTest {
         String email = fakerName.lastName() + UUID.randomUUID() + "@gmail.com";
         Integer age = RANDOM.nextInt(1, 100);
         CustomerRegistrationRequest request =
-                new CustomerRegistrationRequest(name, email, age);
+                new CustomerRegistrationRequest(name, email, age, MALE.name());
         testClient.post()
                 .uri("api/v1/customers")
                 .accept(MediaType.APPLICATION_JSON)
@@ -53,7 +54,7 @@ public class CustomerIntegrationTest {
                 .returnResult()
                 .getResponseBody();
 
-        Customer expectedCustomer = new Customer(name, email, age);
+        Customer expectedCustomer = new Customer(name, email, age, MALE);
 
         assertThat(allCustomers)
                 .usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")

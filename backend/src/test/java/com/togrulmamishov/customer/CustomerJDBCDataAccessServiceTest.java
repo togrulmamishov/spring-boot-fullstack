@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.togrulmamishov.customer.Gender.MALE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
@@ -26,7 +27,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         String fullName = FAKER.name().fullName();
         // Given
         Customer customer = new Customer(
-                fullName, FAKER.internet().safeEmailAddress(), 20);
+                fullName, FAKER.internet().safeEmailAddress(), 20, MALE);
         underTest.insertCustomer(customer);
 
         // When
@@ -47,7 +48,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 fullName,
                 email,
-                20
+                20,
+                MALE
         );
         underTest.insertCustomer(customer);
 
@@ -84,7 +86,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 fullName,
                 email,
-                20
+                20,
+                MALE
         );
         underTest.insertCustomer(customer);
         var actual = underTest.existsPersonWithEmail(email);
@@ -97,7 +100,7 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         String email = FAKER.internet().safeEmailAddress();
         // Given
         Customer customer = new Customer(
-                fullName, email, 20);
+                fullName, email, 20, MALE);
         underTest.insertCustomer(customer);
         var actual = underTest.existsPersonWithId(1);
         assertThat(actual).isTrue();
@@ -111,7 +114,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 fullName,
                 email,
-                20
+                20,
+                MALE
         );
         underTest.insertCustomer(customer);
         var actual = underTest.existsPersonWithId(-1);
@@ -126,7 +130,8 @@ class CustomerJDBCDataAccessServiceTest extends AbstractTestcontainers {
         Customer customer = new Customer(
                 fullName,
                 email,
-                20
+                20,
+                MALE
         );
         underTest.insertCustomer(customer);
         List<Customer> customers = underTest.selectAllCustomers(new Pageable());

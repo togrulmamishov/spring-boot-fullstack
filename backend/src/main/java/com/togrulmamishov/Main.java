@@ -3,6 +3,7 @@ package com.togrulmamishov;
 import com.github.javafaker.Faker;
 import com.togrulmamishov.customer.Customer;
 import com.togrulmamishov.customer.CustomerRepository;
+import com.togrulmamishov.customer.Gender;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,10 +27,12 @@ public class Main {
                 var name = faker.name();
                 var firstName = name.firstName();
                 var lastName = name.lastName();
+                var gender = Gender.values()[random.nextInt(2)];
                 var customer = new Customer(
                         firstName + " " + lastName,
                         (firstName + "." + lastName).toLowerCase() + "@gmail.com",
-                        random.nextInt(16, 99)
+                        random.nextInt(16, 99),
+                        gender
                 );
                 customerRepository.save(customer);
             }

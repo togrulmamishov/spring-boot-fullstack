@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static com.togrulmamishov.customer.Gender.MALE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
@@ -43,7 +44,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 "alex@gmail.com",
-                20);
+                20,
+                MALE);
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
         Customer actual = underTest.getCustomer(id);
         assertThat(actual).isEqualTo(customer);
@@ -54,9 +56,10 @@ class CustomerServiceTest {
         Customer customer = new Customer(
                 "Alex",
                 "alex@gmail.com",
-                20);
+                20,
+                MALE);
         underTest.addCustomer(
-                new CustomerRegistrationRequest(customer.getName(), customer.getEmail(), customer.getAge()));
+                new CustomerRegistrationRequest(customer.getName(), customer.getEmail(), customer.getAge(), MALE.name()));
         verify(customerDao).insertCustomer(argumentCaptor.capture());
         assertThat(argumentCaptor.getValue()).isEqualTo(customer);
     }
