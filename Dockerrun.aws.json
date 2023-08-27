@@ -15,7 +15,7 @@
     },
     {
       "name": "full-stack-professional",
-      "image": "togrulmamishov/spring-boot-fullstack:12.08.2023.16.56.26",
+      "image": "togrulmamishov/spring-boot-fullstack:27.08.2023.21.01.23",
       "essential": true,
       "memory": 512,
       "portMappings": [
