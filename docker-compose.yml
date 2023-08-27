@@ -13,9 +13,9 @@ services:
     networks:
       - db
     restart: unless-stopped
-  full-stack-professional:
-    container_name: full-stack-professional
-    image: togrulmamishov/full-stack-professional
+  customer-api:
+    container_name: customer-api
+    image: togrulmamishov/spring-boot-fullstack
     ports:
       - "8080:8080"
     networks:
@@ -25,6 +25,19 @@ services:
     restart: unless-stopped
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+  customer-api-react:
+    container_name: customer-api-react
+    image: togrulmamishov/customer-api-react
+    build:
+      context: frontend/react
+      args:
+        api_base_url: http://localhost:8080
+    ports:
+      - "3000:5173"
+    depends_on:
+      - customer-api
+    restart: unless-stopped
+
 networks:
   db:
     driver: bridge
