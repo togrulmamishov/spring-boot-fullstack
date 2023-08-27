@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "customer-api-react",
-      "image": "togrulmamishov/customer-api-react:latest",
+      "image": "togrulmamishov/customer-api-react:27.08.2023.20.38.28",
       "essential": true,
       "memory": 256,
       "portMappings": [
